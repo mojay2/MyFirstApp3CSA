@@ -1,6 +1,9 @@
 package com.example.myfirstapp3csa
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +11,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import android.util.Log
+import android.view.Window
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -22,27 +26,55 @@ class MainActivity : AppCompatActivity() {
         val myDialog  = findViewById<Button>(R.id.btnCompute)
 
         myDialog.setOnClickListener{
-            //IF class
-//            val displayDialog = MyDialog()
-//            displayDialog.show(supportFragmentManager, "123")
-            //Else
-            val builder = AlertDialog.Builder(this)
-            builder
-                .setMessage("Are you sure?")
-                .setNegativeButton("Deins boss") {dialog, which ->
-                    Toast.makeText(this, "No ", Toast.LENGTH_LONG).show()
-                }
-                .setPositiveButton("Omsim boss") {dialog, which ->
-                    Toast.makeText(this, "Yes ", Toast.LENGTH_LONG).show()
-                }
-                .setNeutralButton("Baka?") {dialog, which ->
-                    Toast.makeText(this, "Maybe ", Toast.LENGTH_LONG).show()
-                }
-                .show()
-
-//                .setNegativeButton("No") {dialog, which ->
-//                }
+            val message = "Do you want to logout?"
+            showCustomDialogBox(message)
         }
+//        myDialog.setOnClickListener{
+//            //IF class
+////            val displayDialog = MyDialog()
+////            displayDialog.show(supportFragmentManager, "123")
+//            //Else
+//            val builder = AlertDialog.Builder(this)
+//            builder
+//                .setMessage("Are you sure?")
+//                .setNegativeButton("Deins boss") {dialog, which ->
+//                    Toast.makeText(this, "No ", Toast.LENGTH_LONG).show()
+//                }
+//                .setPositiveButton("Omsim boss") {dialog, which ->
+//                    Toast.makeText(this, "Yes ", Toast.LENGTH_LONG).show()
+//                }
+//                .setNeutralButton("Baka?") {dialog, which ->
+//                    Toast.makeText(this, "Maybe ", Toast.LENGTH_LONG).show()
+//                }
+//                .show()
+//
+////                .setNegativeButton("No") {dialog, which ->
+////                }
+//        }
+
+    }
+
+    private fun showCustomDialogBox(message: String) {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val tvMessage = dialog.findViewById<TextView>(R.id.tvMessage)
+        val btnYes = dialog.findViewById<Button>(R.id.btnYes)
+        val btnNo = dialog.findViewById<Button>(R.id.btnNo)
+
+        tvMessage.text = message
+        btnYes.setOnClickListener{
+            Toast.makeText(this, "Logged Out.", Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
+        btnNo.setOnClickListener{
+            Toast.makeText(this, "Logged Out.", Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
 //    fun toSecondActivity(view: View){
