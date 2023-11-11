@@ -68,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         tvMessage.text = message
         btnYes.setOnClickListener{
             Toast.makeText(this, "Logged Out.", Toast.LENGTH_LONG).show()
+            val i = Intent(this, ThirdActivity::class.java)
+            startActivity(i)
             dialog.dismiss()
         }
         btnNo.setOnClickListener{
